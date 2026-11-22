@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const canManageGiveaways = require('../utils/canManageGiveaways');
 const messages = require("../utils/messages");
 
 module.exports = {
@@ -10,6 +11,7 @@ module.exports = {
             name: 'winners',
             description: 'How many winners the giveaway should have',
             type: Discord.ApplicationCommandOptionType.Integer,
+            minValue: 1,
             required: true
         },
         {
@@ -29,7 +31,7 @@ module.exports = {
     run: async (client, interaction) => {
 
         // If the member doesn't have enough permissions
-        if(!interaction.member.permissions.has('MANAGE_MESSAGES') && !interaction.member.roles.cache.some((r) => r.name === "Giveaways")){
+        if (!canManageGiveaways(interaction, Discord.PermissionFlagsBits.ManageMessages)) {
             return interaction.reply({
                 content: ':x: You need to have the manage messages permissions to start giveaways.',
                 ephemeral: true
@@ -39,6 +41,13 @@ module.exports = {
         const giveawayChannel = interaction.options.getChannel('channel');
         const giveawayWinnerCount = interaction.options.getInteger('winners');
         const giveawayPrize = interaction.options.getString('prize');
+
+        if (!Number.isSafeInteger(giveawayWinnerCount) || giveawayWinnerCount < 1) {
+            return interaction.reply({
+                content: ':x: A giveaway must have at least one winner.',
+                ephemeral: true
+            });
+        }
     
         if(!giveawayChannel.isTextBased()) {
             return interaction.reply({
