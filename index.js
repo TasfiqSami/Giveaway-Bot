@@ -81,4 +81,11 @@ fs.readdir("./events/", (_err, files) => {
 });
 
 // Login
-client.login(config.token);
+const botToken = process.env.DISCORD_BOT_TOKEN;
+
+if (!botToken) {
+    console.error('Missing DISCORD_BOT_TOKEN environment variable. Set it in your hosting panel before starting the bot.');
+    process.exit(1);
+}
+
+client.login(botToken);
