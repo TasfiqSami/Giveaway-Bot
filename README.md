@@ -1,47 +1,70 @@
 # Giveaway Bot
 
-🎁 Giveway Bot with slash commands made using the [discord-giveaways](https://npmjs.com/discord-giveaways) package!
+A Discord giveaway bot built with discord.js v14 and [discord-giveaways](https://www.npmjs.com/package/discord-giveaways).
 
 ## Features
 
-* `/start-giveaway` command
-* `/end-giveaway` command
-* `/reroll-giveaway` command
-* `/pause-giveaway` command
-* `/unpause-giveaway` command
-* `/drop-giveaway` command
+- Start and drop giveaways
+- End, pause, and unpause active giveaways
+- Reroll winners
+- Manage giveaways with slash commands
+- Configure the default giveaway appearance and behaviour
 
-<a href="https://zupimages.net/viewer.php?id=23/01/9b7r.png">
-    <img src="https://zupimages.net/up/23/01/9b7r.png" style="width: 80%"/>
-</a>
+## Requirements
 
-<a href="https://zupimages.net/viewer.php?id=23/01/fx0b.png">
-    <img src="https://zupimages.net/up/23/01/fx0b.png" style="width: 30%"/>
-</a>
+- Node.js 18 or newer
+- A Discord application and bot token
+- The bot invited to your server with the required channel and giveaway permissions
 
-## Installation tutorial
+## Setup
 
-* Clone the repository (Or download it manually):
+1. Clone this repository and install dependencies:
+
+   ```sh
+   git clone https://github.com/TasfiqSami/Giveaway-Bot.git
+   cd Giveaway-Bot
+   npm install
+   ```
+
+2. Set the `DISCORD_BOT_TOKEN` environment variable in your terminal or hosting provider's environment/secrets settings. Do not put the token in `config.json` or commit it to Git.
+
+   PowerShell:
+
+   ```powershell
+   $env:DISCORD_BOT_TOKEN = "your-bot-token"
+   ```
+
+   Linux / macOS:
+
+   ```sh
+   export DISCORD_BOT_TOKEN="your-bot-token"
+   ```
+
+3. Review `config.json` and set your server ID and giveaway preferences.
+
+4. Start the bot:
+
+   ```sh
+   npm start
+   ```
+
+## Commands
+
+- `/start-giveaway`
+- `/drop-giveaway`
+- `/end-giveaway`
+- `/pause-giveaway`
+- `/unpause-giveaway`
+- `/reroll-giveaway`
+
+## Tests
+
+Run the lightweight authorization tests with:
+
 ```sh
-git clone https://github.com/Androz2091/giveaways-bot
+npm test
 ```
 
-* Fill the configuration file (config.json):
-```json
-{
-    "token": "Your Discord bot token",
-    "everyoneMention": false,
-    "hostedBy": true,
-    "guildId": "Your server id"
-}
-```
+## Token safety
 
-* Install required dependencies (Execute below command in bot's root directory):
-```sh
-npm install
-```
-
-* Run the bot:
-```sh
-node index.js
-```
+If a bot token was previously committed to this repository, regenerate it in the Discord Developer Portal before deploying. Removing a token from the current file does not remove it from earlier Git history.
